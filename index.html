@@ -428,20 +428,35 @@
             </div>
           </div>
           <div class="contact-form pt-5 mt-2">
-            <form method="post" class="cont-form p-sm-5 p-4">
+            <form method="post" id="contact-Form" class="cont-form p-sm-5 p-4">
               <div class="row">
                 <div class="col-md-6">
                   <input
+                    type="hidden"
+                    name="access_key"
+                    value="9756a7a3-f69c-4144-af01-7ca0c0c474be"
+                  />
+                  <input
+                    type="hidden"
+                    name="subject"
+                    value="Contact Form Submission from Swift Telecom"
+                  />
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    style="display: none"
+                  />
+                  <input
                     type="text"
-                    name="w3lName"
-                    id="w3lName"
+                    name="name"
+                    id="Name"
                     placeholder="Your Name"
                     class="contact-input"
                   />
                   <input
                     type="text"
-                    name="w3lPhone"
-                    id="w3lPhone"
+                    name="phone"
+                    id="Phone"
                     placeholder="Phone Number"
                     class="contact-input"
                   />
@@ -449,16 +464,16 @@
                 <div class="col-md-6">
                   <input
                     type="email"
-                    name="w3lSender"
-                    id="w3lSender"
+                    name="email"
+                    id="Sender"
                     placeholder="Your Email id"
                     class="contact-input"
                     required=""
                   />
                   <input
                     type="text"
-                    name="w3lSubject"
-                    id="w3lSubject"
+                    name="subject"
+                    id="Subject"
                     placeholder="Subject"
                     class="contact-input"
                   />
@@ -466,13 +481,17 @@
               </div>
               <textarea
                 class="contact-textarea"
-                name="w3lMessage"
-                id="w3lMessage"
+                name="message"
+                id="Message"
                 placeholder="Type your message here"
                 required=""
               ></textarea>
               <div class="text-right">
-                <button class="btn btn-style-white btn-style-primary">
+                <button
+                  id="submitBtn"
+                  type="submit"
+                  class="btn btn-style-white btn-style-primary"
+                >
                   Submit Now
                 </button>
               </div>
@@ -561,6 +580,47 @@
     >
       <span class="fa fa-level-up" aria-hidden="true"></span>
     </button>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+        let btn = document.getElementById("submitBtn");
+        btn.disabled = true;
+        btn.innerHTML = "Sending...";
+        const formData = new FormData(form);
+        let object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        axios
+          .post("https://api.web3forms.com/submit", json, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          })
+          .then((response) => {
+            const data = response.data;
+            if (response.status === 200) {
+              alert(`Your response has been saved successfully!`);
+              form.reset(); // Reset form on successful submission
+            } else {
+              console.error(response);
+              alert("Something went wrong!");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            alert("Something went wrong!");
+          })
+          .finally(() => {
+            btn.disabled = false;
+            btn.innerHTML = "Submit Now";
+          });
+      }
+
+      const form = document.getElementById("contact-Form");
+      form.addEventListener("submit", handleSubmit);
+    </script>
     <script>
       window.onscroll = function () {
         scrollFunction();
