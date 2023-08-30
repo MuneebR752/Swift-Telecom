@@ -413,7 +413,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-6 mt-lg-0 mt-4">
+            <div
+              style="min-width: fit-content"
+              class="col-lg-4 col-md-6 mt-lg-0 mt-4"
+            >
               <div class="contact-address p-4">
                 <div class="service-icon h4 d-flex align-items-center">
                   <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -500,7 +503,7 @@
         </div>
       </div>
     </div>
-    <section class="w3l-footer-29-main">
+    <footer class="w3l-footer-29-main">
       <div class="footer-29 py-5">
         <div class="container py-lg-4">
           <div class="row footer-top-29">
@@ -562,7 +565,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </footer>
     <section class="w3l-copyright">
       <div class="container">
         <div class="row bottom-copies">
@@ -579,6 +582,18 @@
       style="display: block"
     >
       <span class="fa fa-level-up" aria-hidden="true"></span>
+    </button>
+    <button
+      id="whatsapp"
+      title="Connect Through Whatsapp"
+      style="display: block"
+    >
+      <a
+        href="https://wa.me/447365178159"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><i class="fa-brands fa-whatsapp text-white"></i
+      ></a>
     </button>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -640,6 +655,10 @@
       function topFunction() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
+      }
+
+      function toWhatsapp() {
+        window.open("https://wa.me/447365178159", "_blank");
       }
     </script>
     <!-- //move top -->
